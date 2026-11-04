@@ -19,6 +19,31 @@ function setup(id,paint){
 toggle.addEventListener('click',()=>{manual=toggle.getAttribute('aria-pressed')==='true';scenes.forEach(f=>f());});
 reduced.addEventListener('change',()=>{manual=null;scenes.forEach(f=>f());});
 document.addEventListener('visibilitychange',()=>scenes.forEach(f=>f()));
+// Low-resolution heat propagation inspired by the classic DOOM fire effect.
+const fw=160,fh=100,heat=new Uint8Array(fw*fh),surface=document.createElement('canvas');
+surface.width=fw;surface.height=fh;
+const fc=surface.getContext('2d'),pixels=fc.createImageData(fw,fh);
+let fireStep=0;
+function burn(){
+ for(let x=0;x<fw;x++)heat[(fh-1)*fw+x]=255;
+ for(let y=0;y<fh-1;y++)for(let x=0;x<fw;x++){
+  const drift=Math.floor(Math.random()*3)-1,source=(y+1)*fw+(x+drift+fw)%fw;
+  heat[y*fw+x]=Math.max(0,heat[source]-Math.floor(Math.random()*10));
+ }
+}
+for(let i=0;i<fh*2;i++)burn();
+setup('fire',(c,w,h,t,dt)=>{
+ fireStep+=dt;
+ while(fireStep>=1/30){burn();fireStep-=1/30;}
+ for(let i=0;i<heat.length;i++){
+  const v=heat[i]/255,j=i*4;
+  pixels.data[j]=Math.min(255,v*3*255);
+  pixels.data[j+1]=Math.max(0,Math.min(255,(v*3-1)*255));
+  pixels.data[j+2]=Math.max(0,(v*3-2)*255);
+  pixels.data[j+3]=255;
+ }
+ fc.putImageData(pixels,0,0);c.imageSmoothingEnabled=false;c.drawImage(surface,0,0,w,h);
+});
 const glyphs='アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789';
 setup('matrix',(c,w,h,t)=>{
  c.fillStyle='#010904';c.fillRect(0,0,w,h);c.font='16px monospace';
