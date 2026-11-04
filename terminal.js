@@ -3,12 +3,12 @@
 window.initializeTerminal = ({open, windows, setState, focusWindow}) => {
  const output=document.querySelector('#terminal-output'),input=document.querySelector('#command');
  const commands=new Map(),history=[];let historyIndex=0,bossState=null,destructing=false;
- function print(text,command){
+ function print(text,command,scroll=true){
   const line=document.createElement('p');line.className='terminal-line';
   if(command){const prompt=document.createElement('span');prompt.className='prompt';prompt.textContent='guest@orbit:~$ '+command;line.append(prompt,document.createElement('br'));}
   line.append(document.createTextNode(text));output.append(line);
   while(output.children.length>60)output.firstElementChild.remove();
-  line.scrollIntoView({block:'nearest'});
+  if(scroll)line.scrollIntoView({block:'nearest'});
  }
  function add(name,description,run){commands.set(name,{description,run:typeof run==='function'?run:()=>run});}
  function effect(className,duration){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.body.classList.remove(className);void document.body.offsetWidth;document.body.classList.add(className);setTimeout(()=>document.body.classList.remove(className),duration);}
@@ -178,22 +178,23 @@ window.initializeTerminal = ({open, windows, setState, focusWindow}) => {
   return prefix+name+' — '+description+'\nВикористання: '+usage+'\nОперацію виконано подумки. Система вдячна за делікатність.';
  }
 
- function execute(raw){
+ function execute(raw,{automatic=false}={}){
   const command=raw.trim().replace(/\s+/g,' '),key=command.toLowerCase();if(!key)return;
-  history.push(command);if(history.length>100)history.shift();historyIndex=history.length;
+  if(!automatic){history.push(command);if(history.length>100)history.shift();historyIndex=history.length;}
   let text;
   if(commands.has(key))text=commands.get(key).run();
   else if(linux.has(key.split(' ')[0]))text=linuxRun(key.split(' ')[0],command.split(' ').slice(1));
   else if(key.startsWith('echo '))text=command.slice(5);
   else if(key.startsWith('cat ')){const name=command.slice(4);text=Object.hasOwn(files,name)?files[name]:'Файл не знайдено. Навіть котик не знає, де він.';}
   else text='Невідома команда. Введи help або ls.';
-  if(text!==null)print(text,command);
+  if(text!==null)print(text,command,!automatic);
  }
  document.querySelector('#command-form').addEventListener('submit',event=>{event.preventDefault();const command=input.value;input.value='';execute(command);});
  input.addEventListener('keydown',event=>{
   if(event.key!=='ArrowUp'&&event.key!=='ArrowDown')return;
   event.preventDefault();historyIndex=Math.max(0,Math.min(history.length,historyIndex+(event.key==='ArrowUp'?-1:1)));input.value=history[historyIndex]||'';
  });
+ window.startIdleTerminal(execute);
  return {execute,commands};
 };
 })();
