@@ -3,12 +3,13 @@
 window.initializeTerminal = ({open, windows, setState, focusWindow}) => {
  const output=document.querySelector('#terminal-output'),input=document.querySelector('#command');
  const commands=new Map(),history=[];let historyIndex=0,bossState=null,destructing=false;
- function print(text,command,scroll=true){
+ function print(text,command){
   const line=document.createElement('p');line.className='terminal-line';
   if(command){const prompt=document.createElement('span');prompt.className='prompt';prompt.textContent='guest@orbit:~$ '+command;line.append(prompt,document.createElement('br'));}
   line.append(document.createTextNode(text));output.append(line);
   while(output.children.length>60)output.firstElementChild.remove();
-  if(scroll)line.scrollIntoView({block:'nearest'});
+  const shell=output.closest('.shell');
+  if(shell) shell.scrollTop=shell.scrollHeight;
  }
  function add(name,description,run){commands.set(name,{description,run:typeof run==='function'?run:()=>run});}
  function effect(className,duration){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.body.classList.remove(className);void document.body.offsetWidth;document.body.classList.add(className);setTimeout(()=>document.body.classList.remove(className),duration);}
@@ -187,7 +188,7 @@ window.initializeTerminal = ({open, windows, setState, focusWindow}) => {
   else if(key.startsWith('echo '))text=command.slice(5);
   else if(key.startsWith('cat ')){const name=command.slice(4);text=Object.hasOwn(files,name)?files[name]:'Файл не знайдено. Навіть котик не знає, де він.';}
   else text='Невідома команда. Введи help або ls.';
-  if(text!==null)print(text,command,!automatic);
+  if(text!==null)print(text,command);
  }
  document.querySelector('#command-form').addEventListener('submit',event=>{event.preventDefault();const command=input.value;input.value='';execute(command);});
  input.addEventListener('keydown',event=>{
