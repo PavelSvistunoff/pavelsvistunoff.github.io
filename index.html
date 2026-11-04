@@ -1,32 +1,42 @@
 <!doctype html>
 <html lang="uk">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Особиста сторінка Павла Свістунова. Код, проєкти та профіль на GitHub.">
-  <title>Павло Свістунов — особиста сторінка</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="theme.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Павло Свистунов — персональний цифровий простір. Інтерактивний робочий стіл, код і проєкти.">
+<title>Павло Свистунов / ORBIT OS</title>
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Перейти до вмісту</a>
-  <header class="header">
-    <a class="brand" href="./" aria-label="На головну">PS<span aria-hidden="true">.</span></a>
-    <button class="theme-toggle" type="button" hidden aria-pressed="false">Темна тема</button>
-  </header>
-  <main id="main">
-    <section class="hero" aria-labelledby="name">
-      <p class="eyebrow">ОСОБИСТА СТОРІНКА / 01</p>
-      <h1 id="name">Павло<br><span>Свістунов.</span></h1>
-      <p class="intro">Ідеї стають цікавішими,<br>коли перетворюються на код.</p>
-      <a class="button" href="https://github.com/PavelSvistunoff">Переглянути GitHub <span aria-hidden="true">↗</span></a>
-    </section>
-    <section class="details" aria-labelledby="projects">
-      <div><p class="eyebrow">КОД І ПРОЄКТИ</p><h2 id="projects">Відкритий простір<br>для нових ідей.</h2></div>
-      <div><p>Репозиторії, експерименти та історія змін — у моєму профілі на GitHub.</p><a class="text-link" href="https://github.com/PavelSvistunoff?tab=repositories">Усі репозиторії <span aria-hidden="true">→</span></a></div>
-    </section>
-  </main>
-  <footer><span>Павло Свістунов</span><a href="https://github.com/PavelSvistunoff/pavelsvistunoff.github.io">Код цієї сторінки <span aria-hidden="true">↗</span></a></footer>
+<div class="nebula" aria-hidden="true"></div><div class="grid" aria-hidden="true"></div>
+<header class="system-bar"><a href="./" class="logo" aria-label="На головну">◈</a><span class="system-id">PERSONAL WORKSPACE / ПАВЛО СВИСТУНОВ</span><div class="telemetry"><i></i> SYSTEM ONLINE <time id="clock"></time></div></header>
+<nav class="launchers" aria-label="Відкрити вікно">
+<button data-open="profile"><span>◎</span>Профіль</button><button data-open="projects"><span>⌘</span>Проєкти</button><button data-open="aquarium"><span>≈</span>Акваріум</button><button data-open="terminal"><span>›_</span>Термінал</button>
+</nav>
+<main id="desktop" aria-label="Робочий стіл">
+<div class="backdrop-label" aria-hidden="true">MAKE<br>SOMETHING<br>UNEXPECTED.<small>EXPERIMENTAL PERSONAL INTERFACE — 01</small></div>
+<section class="window profile" id="profile" aria-labelledby="profile-title" tabindex="-1">
+<header class="titlebar"><h2 id="profile-title"><span>◎</span> identity.sys</h2><div class="controls"><button data-action="minimize" aria-label="Згорнути профіль">−</button><button data-action="maximize" aria-label="Розгорнути профіль" aria-pressed="false">□</button><button data-action="close" aria-label="Закрити профіль">×</button></div></header>
+<div class="window-body"><div class="identity-top"><span class="tag">PERSONAL ID / 001</span><span class="online">● НА ЗВ’ЯЗКУ</span></div><div class="avatar" aria-hidden="true">PS<span>+</span></div><p class="eyebrow">ВІТАЮ У МОЄМУ ЦИФРОВОМУ ПРОСТОРІ</p><h1>Павло<br><em>Свистунов</em></h1><p class="intro">Ідеї. Код. Експерименти.<br>Тут можна трохи порухати реальність.</p><a class="primary" href="https://github.com/PavelSvistunoff">Мій GitHub <span>↗</span></a><div class="window-note">↖ Перетягуй за заголовок. Облаштуй простір по-своєму.</div></div>
+</section>
+<section class="window projects" id="projects" aria-labelledby="projects-title" tabindex="-1">
+<header class="titlebar"><h2 id="projects-title"><span>⌘</span> project.directory</h2><div class="controls"><button data-action="minimize" aria-label="Згорнути проєкти">−</button><button data-action="maximize" aria-label="Розгорнути проєкти" aria-pressed="false">□</button><button data-action="close" aria-label="Закрити проєкти">×</button></div></header>
+<div class="window-body"><span class="tag">OPEN SOURCE / EXPLORER</span><h3>Усе починається<br>з цікавості.</h3><a class="project-link" href="https://github.com/PavelSvistunoff?tab=repositories"><span class="folder">⌑</span><span><strong>Репозиторії</strong><small>Код, ідеї та експерименти</small></span><span>↗</span></a><a class="project-link" href="https://github.com/PavelSvistunoff/pavelsvistunoff.github.io"><span class="folder">⌁</span><span><strong>Цей цифровий простір</strong><small>Зазирнути під капот</small></span><span>↗</span></a><p class="micro">LOCAL INTERFACE · GLOBAL CURIOSITY</p></div>
+</section>
+<section class="window aquarium" id="aquarium" aria-labelledby="aquarium-title" tabindex="-1">
+<header class="titlebar"><h2 id="aquarium-title"><span>≈</span> bio.tank / live</h2><div class="controls"><button data-action="minimize" aria-label="Згорнути акваріум">−</button><button data-action="maximize" aria-label="Розгорнути акваріум" aria-pressed="false">□</button><button data-action="close" aria-label="Закрити акваріум">×</button></div></header>
+<div class="tank"><canvas id="fish" aria-label="Анімований акваріум зі світними рибками"></canvas><div class="tank-overlay"><span>PELAGIC OBSERVATORY</span><span>DEPTH 024 M</span></div><div class="tank-bottom"><span>◉ LIVE ECOSYSTEM</span><span>O₂ 98.4%</span></div></div>
+<div class="tank-toolbar"><span>Рибки реагують на дотик до води</span><button id="feed">Погодувати +</button></div>
+</section>
+<section class="window terminal" id="terminal" aria-labelledby="terminal-title" tabindex="-1">
+<header class="titlebar"><h2 id="terminal-title"><span>›_</span> orbit.shell</h2><div class="controls"><button data-action="minimize" aria-label="Згорнути термінал">−</button><button data-action="maximize" aria-label="Розгорнути термінал" aria-pressed="false">□</button><button data-action="close" aria-label="Закрити термінал">×</button></div></header>
+<div class="window-body shell"><p><span class="muted">ORBIT OS [personal edition]</span><br>З’єднання з уявою встановлено.</p><div id="terminal-output" role="log" aria-live="polite"><p><span class="prompt">guest@orbit:~$</span> help<br><span class="muted">Команди: help, about, projects, fish, clear</span></p></div><form id="command-form"><label for="command" class="prompt">guest@orbit:~$</label><input id="command" autocomplete="off" spellcheck="false" aria-label="Команда термінала"><button type="submit" aria-label="Виконати команду">↵</button></form></div>
+</section>
+</main>
+<footer class="dock"><div class="dock-brand">◈</div><div id="tasks" aria-label="Вікна"></div><div class="dock-tools"><button id="motion" aria-pressed="false">Пауза анімації</button><button id="reset">Скинути вікна</button></div></footer>
+<div class="status-line"><span>ПАВЛО СВИСТУНОВ © <span id="year">2026</span></span><span>DRAG · EXPLORE · CREATE</span></div>
+<noscript><p class="no-js">Для керування вікнами й анімації увімкни JavaScript. Посилання на GitHub працюють і без нього.</p></noscript>
 </body>
 </html>

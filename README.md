@@ -1,20 +1,32 @@
-# Personal website
+# ORBIT OS — Павло Свистунов
 
-A responsive Ukrainian business card for Pavel Svistunoff, hosted on GitHub Pages.
+A dependency-free Ukrainian personal website styled as a science-fiction desktop.
 
-## Development
+## Run locally
 
-No dependencies or build step. Run `python3 -m http.server 8000` in the repository and open http://localhost:8000.
+Run `python3 -m http.server 8000` in this directory, then open http://localhost:8000. No install or build step.
 
-- `index.html`: semantic content and GitHub links.
-- `styles.css`: responsive layout, system fonts and light/dark palettes.
-- `theme.js`: optional theme toggle; follows the system until a preference is saved. Disabled storage is supported.
-- Legacy demo URLs remain available.
+## Interaction
 
-## Verification
+- Drag a window's title bar on desktop to reposition it.
+- Title bar buttons minimize, maximize/restore, and close each window. Double-click the title bar to maximize/restore.
+- The launcher icons and taskbar reopen closed/minimized windows.
+- Reset restores the default arrangement and opens all windows.
+- The canvas aquarium has twelve swimming fish, bubbles, light shafts, and feeding by pointer or button.
+- Pause stops animation. Reduced-motion preferences pause it by default. Hidden tabs and hidden aquarium windows stop animation work.
+- Terminal commands: help, about, projects, fish, clear. Input is displayed as text, never executed.
+- Narrow screens stack windows vertically and disable dragging to keep content reachable.
+- GitHub links remain available without JavaScript.
 
-Check desktop and narrow mobile layouts, keyboard navigation, both themes, disabled JavaScript and blocked local storage. JavaScript syntax can be checked with `node --check theme.js`.
+The oxygen/depth readouts are decorative science-fiction scenery, not real measurements.
 
-## Review findings addressed
+## Files
 
-The previous home page loaded unused AngularJS/Angular Material and overlapping jQuery UI/Mobile dependencies for a demo dialog and draggable placeholder. The new page removes these dependencies and automatic dialog, adds UTF-8 and viewport metadata, a descriptive title, Ukrainian language metadata, landmarks, visible keyboard focus and a skip link. Personal contact details and professional claims are deliberately left for the owner to supply.
+`index.html`: content and window controls. `styles.css`: desktop/mobile layout.
+`theme.js`: window manager, terminal, clock and canvas aquarium (filename retained from the first draft).
+Legacy demo URLs are retained.
+
+## Validation
+
+JavaScript syntax: `node --check theme.js`.
+Browser checked on desktop: initial rendering, drag, minimize, reopen from taskbar, close, reopen from launcher, maximize. Review narrow-screen layout on a physical phone before merging.
