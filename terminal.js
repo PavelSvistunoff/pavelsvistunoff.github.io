@@ -118,11 +118,68 @@ window.initializeTerminal = ({open, windows, setState, focusWindow}) => {
  add("rollback","відкотити рішення","Повертаємося до моменту, коли ще була надія.");
  add("credits","титри","У ролях: Павло, браузер, котик і нескінченна черга деплою.");
  add("achievement","отримати досягнення","🏆 Досягнення: ти читаєш help замість роботи.");
+ const linux = new Map([["cd",["змінити каталог","cd КАТАЛОГ"]],["mkdir",["створити каталог","mkdir КАТАЛОГ"]],["rmdir",["видалити порожній каталог","rmdir КАТАЛОГ"]],["touch",["створити порожній файл","touch ФАЙЛ"]],["cp",["копіювати файли","cp ДЖЕРЕЛО ПРИЗНАЧЕННЯ"]],["mv",["перемістити або перейменувати","mv ДЖЕРЕЛО ПРИЗНАЧЕННЯ"]],["rm",["видалити файл","rm ФАЙЛ"]],["ln",["створити посилання","ln -s ЦІЛЬ ПОСИЛАННЯ"]],["readlink",["прочитати ціль посилання","readlink ПОСИЛАННЯ"]],["realpath",["абсолютний шлях","realpath ФАЙЛ"]],["basename",["ім’я без каталогу","basename ШЛЯХ"]],["dirname",["каталог шляху","dirname ШЛЯХ"]],["find",["пошук файлів","find . -name \"*.txt\""]],["locate",["пошук в індексі","locate README"]],["which",["шлях до програми","which ПРОГРАМА"]],["whereis",["пошук програми й документації","whereis ПРОГРАМА"]],["file",["визначити тип файлу","file ФАЙЛ"]],["stat",["метадані файлу","stat ФАЙЛ"]],["du",["розмір файлів","du -sh КАТАЛОГ"]],["tree",["дерево каталогів","tree"]],["head",["перші рядки","head -n 5 ФАЙЛ"]],["tail",["останні рядки","tail -n 5 ФАЙЛ"]],["less",["перегляд тексту","less ФАЙЛ"]],["more",["посторінковий перегляд","more ФАЙЛ"]],["wc",["кількість рядків і слів","wc ФАЙЛ"]],["sort",["сортувати рядки","sort ФАЙЛ"]],["uniq",["прибрати сусідні повтори","uniq ФАЙЛ"]],["cut",["вибрати поля","cut -d , -f 1 ФАЙЛ"]],["paste",["об’єднати рядки","paste ФАЙЛ1 ФАЙЛ2"]],["tr",["замінити символи","tr a-z A-Z"]],["grep",["пошук за шаблоном","grep ШАБЛОН ФАЙЛ"]],["sed",["потокове редагування","sed s/старе/нове/g ФАЙЛ"]],["awk",["обробка полів","awk \"{print $1}\" ФАЙЛ"]],["diff",["порівняти файли","diff ФАЙЛ1 ФАЙЛ2"]],["cmp",["побайтове порівняння","cmp ФАЙЛ1 ФАЙЛ2"]],["tee",["вивід у файл і термінал","tee ФАЙЛ"]],["xargs",["побудувати аргументи","xargs КОМАНДА"]],["printf",["форматований вивід","printf ФОРМАТ АРГУМЕНТИ"]],["strings",["рядки з двійкового файлу","strings ФАЙЛ"]],["od",["вісімковий дамп","od ФАЙЛ"]],["tar",["архіви tar","tar -tf АРХІВ"]],["gzip",["стиснути gzip","gzip ФАЙЛ"]],["gunzip",["розпакувати gzip","gunzip ФАЙЛ.gz"]],["zip",["створити ZIP","zip АРХІВ.zip ФАЙЛ"]],["unzip",["розпакувати ZIP","unzip АРХІВ.zip"]],["bzip2",["стиснути bzip2","bzip2 ФАЙЛ"]],["xz",["стиснути xz","xz ФАЙЛ"]],["chmod",["права доступу","chmod 644 ФАЙЛ"]],["chown",["власник файлу","chown КОРИСТУВАЧ ФАЙЛ"]],["chgrp",["група файлу","chgrp ГРУПА ФАЙЛ"]],["umask",["маска прав","umask"]],["id",["ідентифікатори користувача","id"]],["groups",["групи користувача","groups"]],["users",["активні користувачі","users"]],["who",["хто увійшов","who"]],["w",["користувачі та активність","w"]],["last",["історія входів","last"]],["passwd",["змінити пароль","passwd"]],["su",["змінити користувача","su КОРИСТУВАЧ"]],["useradd",["додати користувача","useradd ІМʼЯ"]],["userdel",["видалити користувача","userdel ІМʼЯ"]],["groupadd",["створити групу","groupadd ГРУПА"]],["hostname",["ім’я комп’ютера","hostname"]],["hostnamectl",["інформація про хост","hostnamectl"]],["uname",["інформація про систему","uname -a"]],["lscpu",["інформація про CPU","lscpu"]],["lsblk",["блокові пристрої","lsblk"]],["lsusb",["USB-пристрої","lsusb"]],["lspci",["PCI-пристрої","lspci"]],["mount",["змонтувати файлову систему","mount"]],["umount",["відмонтувати файлову систему","umount ТОЧКА"]],["df",["вільний простір","df -h"]],["free",["оперативна пам’ять","free -h"]],["kill",["сигнал процесу","kill PID"]],["killall",["сигнал за назвою","killall НАЗВА"]],["pgrep",["пошук PID","pgrep НАЗВА"]],["pkill",["сигнал процесам за шаблоном","pkill НАЗВА"]],["jobs",["фонові завдання","jobs"]],["bg",["продовжити у фоні","bg %1"]],["fg",["на передній план","fg %1"]],["nice",["пріоритет запуску","nice -n 10 КОМАНДА"]],["renice",["змінити пріоритет","renice 10 -p PID"]],["nohup",["продовжити після виходу","nohup КОМАНДА"]],["timeout",["обмежити час","timeout 5 КОМАНДА"]],["watch",["повторювати команду","watch КОМАНДА"]],["systemctl",["керувати службами","systemctl status coffee"]],["journalctl",["журнал служб","journalctl -n 5"]],["dmesg",["журнал ядра","dmesg"]],["ip",["мережеві інтерфейси","ip addr"]],["ss",["мережеві сокети","ss -tuln"]],["curl",["HTTP-клієнт","curl URL"]],["wget",["завантажити файл","wget URL"]],["ssh",["віддалений термінал","ssh КОРИСТУВАЧ@ХОСТ"]],["scp",["копіювання через SSH","scp ФАЙЛ ХОСТ:ШЛЯХ"]],["rsync",["синхронізація файлів","rsync -av ДЖЕРЕЛО ЦІЛЬ"]],["dig",["DNS-запити","dig ДОМЕН"]],["nslookup",["DNS-пошук","nslookup ДОМЕН"]],["traceroute",["маршрут пакетів","traceroute ХОСТ"]],["env",["оточення процесу","env"]],["export",["змінна середовища","export НАЗВА=ЗНАЧЕННЯ"]]]);
+ for(const [name,[description,usage]] of linux){
+  if(commands.has(name))throw new Error('Duplicate Linux command: '+name);
+  add(name,description+' [Linux demo]',()=>linuxRun(name,[]));
+ }
+ function linuxRun(name,args){
+  const [description,usage]=linux.get(name);
+  const prefix='[Linux demo — симуляція, без доступу до ОС]\n';
+  if(args.includes('--help')||args.includes('-h')&&!['df','free'].includes(name))return prefix+name+' — '+description+'\nВикористання: '+usage;
+  const samples={
+   tree:'.\n├── README.txt\n├── todo.txt\n├── report.csv\n├── ideas/\n└── unfinished/',
+   id:'uid=1000(guest) gid=1000(guest) groups=1000(guest)',
+   groups:'guest coffee astronauts',users:'guest',who:'guest  orbit/0  сьогодні',w:'USER   TTY      WHAT\nguest  orbit/0  читає help',
+   hostname:'orbit',hostnamectl:'Static hostname: orbit\nOperating System: ImaginationOS (demo)',
+   uname:'ImaginationOS orbit 99.0 browser virtual',
+   lscpu:'Architecture: уявна\nCPU(s): 8 віртуальних хом’яків',
+   lsblk:'NAME   SIZE MOUNTPOINT\nvoid0  42G  /\ncoffee  1L  /dev/mug',
+   lsusb:'Bus 001 Device 001: Rubber Duck Debugger',
+   lspci:'00:00.0 Imagination Processing Unit',
+   mount:'/dev/void0 on / type imagination (rw)',
+   df:'Filesystem  Size Used Avail Use% Mounted on\n/dev/void0  42G  21G   21G  50% /',
+   free:'         total  used  free\nMem:       16G    8G    8G',
+   umask:'0022',pgrep:'42',jobs:'[1]+ Running  coffee --brew',
+   systemctl:'● coffee.service — Caffeine daemon\n   Active: active (brewing)',
+   journalctl:'orbit coffee[42]: Кава готова.\norbit scheduler[1]: Дедлайн відкладено.',
+   dmesg:'[0.000] Imagination kernel initialized\n[0.042] rubberduck: debugger attached',
+   ip:'1: lo: <LOOPBACK,UP>\n    inet 127.0.0.1/8\n2: imagination0: <UP>',
+   ss:'State  Local Address:Port\nLISTEN 127.0.0.1:4242',
+   env:'USER=guest\nHOME=/home/guest\nSHELL=orbit.shell',
+   last:'guest  orbit/0  сьогодні  still dreaming'
+  };
+  if(name==='basename')return prefix+(args[0]||'/home/guest/README.txt').split('/').filter(Boolean).pop();
+  if(name==='dirname'){const p=args[0]||'/home/guest/README.txt';return prefix+(p.includes('/')?p.slice(0,p.lastIndexOf('/'))||'/':'.');}
+  if(name==='realpath')return prefix+'/home/guest/'+(args[0]||'.').replace(/^\.\//,'');
+  if(['head','tail','less','more','wc','grep','sort','uniq','file','stat','find','locate','du'].includes(name)){
+   if(['find','locate'].includes(name))return prefix+Object.keys(files).filter(n=>n.includes((args.at(-1)||'').replace(/[*"]/g,''))||args.length<2).map(n=>'./'+n).join('\n');
+   const filename=args.at(-1)||'README.txt';
+   if(!Object.hasOwn(files,filename))return prefix+filename+': файл відсутній у demo. Доступні: '+Object.keys(files).join(', ');
+   const text=files[filename],lines=text.split('\n');
+   if(name==='wc')return prefix+lines.length+' '+text.split(/\s+/).length+' '+new TextEncoder().encode(text).length+' '+filename;
+   if(name==='file')return prefix+filename+': UTF-8 text';
+   if(name==='stat')return prefix+'File: '+filename+'\nSize: '+new TextEncoder().encode(text).length+' bytes\nAccess: (0644/-rw-r--r--) Uid: guest';
+   if(name==='du')return prefix+'4K\t'+filename;
+   if(name==='grep')return prefix+lines.filter(l=>l.includes(args[0]||'')).join('\n');
+   const nIndex=args.indexOf('-n'),n=nIndex>=0?Math.max(0,Math.min(100,Number(args[nIndex+1])||0)):10;
+   if(name==='head')return prefix+lines.slice(0,n).join('\n');
+   if(name==='tail')return prefix+(n?lines.slice(-n).join('\n'):'');
+   if(name==='sort')return prefix+lines.sort().join('\n');
+   if(name==='uniq')return prefix+lines.filter((l,i)=>i===0||l!==lines[i-1]).join('\n');
+   return prefix+text;
+  }
+  if(Object.hasOwn(samples,name))return prefix+samples[name];
+  if(['curl','wget','ssh','scp','rsync','dig','nslookup','traceroute'].includes(name))return prefix+'Мережеве звернення не виконується.\nПриклад: '+usage;
+  return prefix+name+' — '+description+'\nВикористання: '+usage+'\nЦе демонстрація: файли, процеси, паролі й налаштування не змінюються.';
+ }
+
  function execute(raw){
   const command=raw.trim().replace(/\s+/g,' '),key=command.toLowerCase();if(!key)return;
   history.push(command);if(history.length>100)history.shift();historyIndex=history.length;
   let text;
   if(commands.has(key))text=commands.get(key).run();
+  else if(linux.has(key.split(' ')[0]))text=linuxRun(key.split(' ')[0],command.split(' ').slice(1));
   else if(key.startsWith('echo '))text=command.slice(5);
   else if(key.startsWith('cat ')){const name=command.slice(4);text=Object.hasOwn(files,name)?files[name]:'Файл не знайдено. Навіть котик не знає, де він.';}
   else text='Невідома команда. Введи help або ls.';
