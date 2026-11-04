@@ -6,7 +6,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let topLayer = 10;
   const tasks = document.querySelector('#tasks');
-  const names = {profile:'◎ Профіль',projects:'⌘ Проєкти',aquarium:'≈ Акваріум',terminal:'›_ Термінал'};
+  const names = {profile:'◎ Профіль',projects:'⌘ Проєкти',aquarium:'≈ Акваріум',terminal:'›_ Термінал',matrix:'▥ Matrix',cosmos:'✧ Cosmos'};
   const state = new Map();
   const taskButtons = new Map();
   function focusWindow(win) {
@@ -35,7 +35,7 @@
     task.type = 'button'; task.textContent = names[win.id];
     tasks.append(task); taskButtons.set(win.id,task);
     task.addEventListener('click',() => open(win.id));
-    setState(win,'open',false);
+    setState(win,win.hidden ? 'closed' : 'open',false);
     win.addEventListener('pointerdown',() => focusWindow(win));
     win.querySelectorAll('[data-action]').forEach(button => button.addEventListener('click',() => {
       const action = button.dataset.action;
