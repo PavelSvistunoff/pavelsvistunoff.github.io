@@ -32,6 +32,33 @@ setup('matrix',(c,w,h,t)=>{
   }
  }
 });
+setup('nyan',(c,w,h,t)=>{
+ c.fillStyle='#091849';c.fillRect(0,0,w,h);
+ for(let i=0;i<45;i++){const x=((i*97-t*(25+i%4*13))%w+w)%w,y=(i*61)%h;c.fillStyle='#d7ebff';c.fillRect(x,y,3,3);if(i%4===0){c.fillRect(x-3,y+1,9,1);c.fillRect(x+1,y-3,1,9);}}
+ const scale=Math.max(2,Math.min(w/95,h/55)),x=w*.53,y=h*.48+Math.sin(t*9)*scale;
+ const rainbow=['#ff4343','#ff982b','#fff14f','#58db54','#4cafff','#ae69e8'];
+ rainbow.forEach((color,i)=>{c.fillStyle=color;for(let k=0;k<14;k++){const xx=x-k*scale*5;c.fillRect(xx-scale*5,y+(i-3)*scale*3+Math.sin(k*.9+t*9)*scale,scale*5+1,scale*3+1);}});
+ c.save();c.translate(x,y);c.scale(scale,scale);
+ const box=(x,y,w,h,color)=>{c.fillStyle=color;c.fillRect(x,y,w,h);};
+ box(-1,-12,30,23,'#252337');box(1,-10,26,19,'#e9bb81');box(4,-8,21,15,'#f69ac1');
+ for(let i=0;i<12;i++)box(5+i*7%19,-6+i*5%12,1,1,'#e6539c');
+ box(20,-9,17,17,'#252337');box(20,-14,6,8,'#252337');box(31,-14,6,8,'#252337');box(22,-11,2,4,'#aaa9b8');box(33,-11,2,4,'#aaa9b8');box(22,-7,13,13,'#aaa9b8');
+ box(24,-3,2,2,'#171525');box(31,-3,2,2,'#171525');box(28,0,1,2,'#171525');box(26,3,6,1,'#171525');box(22,0,2,2,'#ee91b0');box(33,0,2,2,'#ee91b0');
+ const step=Math.sin(t*10)>0?1:-1;box(3,11,5,3+step,'#aaa9b8');box(20,11,5,3-step,'#aaa9b8');box(-8,-1,8,4,'#aaa9b8');box(-10,-4+step,4,5,'#aaa9b8');c.restore();
+});
+const player=document.getElementById('aime-player'),aime=document.getElementById('aime');
+function startVideo(){
+ if(player.querySelector('iframe'))return;
+ const iframe=document.createElement('iframe');
+ iframe.src='https://www.youtube-nocookie.com/embed/zvq9r6R6QAY?autoplay=1&rel=0';
+ iframe.title='Caramella Girls — Caramelldansen (Swedish Original)';
+ iframe.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';
+ iframe.allowFullscreen=true;
+ iframe.referrerPolicy='strict-origin-when-cross-origin';
+ player.replaceChildren(iframe);
+}
+new MutationObserver(()=>{if(aime.hidden)player.replaceChildren();else startVideo();}).observe(aime,{attributes:true,attributeFilter:['hidden']});
+
 const rocks=Array.from({length:85},(_,i)=>({x:Math.sin(i*127.1)*3,y:Math.cos(i*53.7)*2,z:(i+.5)/85,size:.025+(i%7)*.007,angle:i*2.1}));
 setup('cosmos',(c,w,h,t)=>{
  c.fillStyle='#030611';c.fillRect(0,0,w,h);
