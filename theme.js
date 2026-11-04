@@ -6,7 +6,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let topLayer = 10;
   const tasks = document.querySelector('#tasks');
-  const names = {profile:'◎ Профіль',projects:'⌘ Проєкти',aquarium:'≈ Акваріум',terminal:'›_ Термінал',matrix:'▥ Matrix',cosmos:'✧ Cosmos'};
+  const names = {profile:'◎ Профіль',projects:'⌘ Проєкти',aquarium:'≈ Акваріум',terminal:'›_ Термінал',matrix:'▥ Matrix',cosmos:'✧ Cosmos',nyan:'🌈 Nyan',aime:'♫ Aime'};
   const state = new Map();
   const taskButtons = new Map();
   function focusWindow(win) {
