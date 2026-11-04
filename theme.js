@@ -83,13 +83,14 @@
     const input = document.querySelector('#command'), command = input.value.trim().toLowerCase();
     input.value = ''; if (!command) return;
     if (command === 'clear') { output.replaceChildren(); return; }
-    const replies = {help:'Команди: help, about, projects, fish, clear',about:'Павло Свистунов. Ідеї. Код. Експерименти.',projects:'Відкриваю каталог проєктів…',fish:'Акваріум відкрито. Торкнися води, щоб погодувати рибок.'};
+    const replies = {help:'Команди: help, about, projects, fish, matrix, cosmos, nyan, aime, clear',about:'Павло Свистунов. Ідеї. Код. Експерименти.',projects:'Відкриваю каталог проєктів…',fish:'Акваріум відкрито. Торкнися води, щоб погодувати рибок.',matrix:'Відкриваю Matrix…',cosmos:'Відкриваю Cosmos…',nyan:'Відкриваю Nyan…',aime:'Відкриваю Aime — Caramelldansen…'};
     const line = document.createElement('p'), prompt = document.createElement('span');
     prompt.className = 'prompt'; prompt.textContent = 'guest@orbit:~$ ' + command;
-    line.append(prompt,document.createElement('br'),document.createTextNode(replies[command] || 'Невідома команда. Введи help.'));
+    line.append(prompt,document.createElement('br'),document.createTextNode(Object.hasOwn(replies, command) ? replies[command] : 'Невідома команда. Введи help.'));
     output.append(line); while (output.children.length > 30) output.firstElementChild.remove();
     if (command === 'projects') open('projects');
     if (command === 'fish') open('aquarium');
+    if (['matrix', 'cosmos', 'nyan', 'aime'].includes(command)) open(command);
     line.scrollIntoView({block:'nearest'});
   });
 
