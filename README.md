@@ -6,6 +6,10 @@ A dependency-free Ukrainian personal website styled as a science-fiction desktop
 
 Run `python3 -m http.server 8000` in this directory, then open http://localhost:8000. No install or build step.
 
+## Check online
+
+https://pavelsvistunoff.github.io/
+
 ## Interaction
 
 - Drag a window's title bar on desktop to reposition it.
