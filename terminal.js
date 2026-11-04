@@ -14,7 +14,7 @@ window.initializeTerminal = ({open, windows, setState, focusWindow}) => {
  function effect(className,duration){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.body.classList.remove(className);void document.body.offsetWidth;document.body.classList.add(className);setTimeout(()=>document.body.classList.remove(className),duration);}
  function toast(text){const el=document.createElement('div');el.className='terminal-toast';el.textContent=text;document.body.append(el);setTimeout(()=>el.remove(),5000);}
  const files={'README.txt':'Павло Свистунов. Ідеї. Код. Експерименти.','todo.txt':'1. Випити каву\n2. Зробити щось велике\n3. Перенести пункт 2 на завтра.','.secrets':'Пароль від Всесвіту: будь ласка.','report.csv':'Звіт,Прогрес\nПланування звіту,100%\nЗвіт про планування,100%\nРеальна робота,очікує каву'};
- add('help','список команд',()=>[...commands.keys()].join('\n'));
+ add('help','список команд',()=>[...commands].map(([name,c])=>name.padEnd(28)+' — '+c.description.split(' — ')[0]).join('\n'));
  add('about','про власника','Павло Свистунов. Ідеї. Код. Експерименти.');
  for(const [name,id] of Object.entries({projects:'projects',fish:'aquarium',matrix:'matrix',cosmos:'cosmos',nyan:'nyan',aime:'aime'}))add(name,'відкрити '+id,()=>{open(id);return 'Відкриваю '+id+'…';});
  add('clear','очистити термінал',()=>{output.replaceChildren();return null;});
