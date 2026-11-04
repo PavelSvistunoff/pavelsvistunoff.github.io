@@ -37,6 +37,7 @@
     task.addEventListener('click',() => open(win.id));
     setState(win,win.hidden ? 'closed' : 'open',false);
     win.addEventListener('pointerdown',() => focusWindow(win));
+    win.addEventListener('focusin',() => { if (!win.classList.contains('active')) focusWindow(win); });
     win.querySelectorAll('[data-action]').forEach(button => button.addEventListener('click',() => {
       const action = button.dataset.action;
       if (action === 'maximize') { maximize(win); return; }
